@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 import CartContext from 'context/CartContext';
 
-import { Layout, ImageGallery } from 'components';
+import { Layout, ImageGallery, ProductQuantityAdder } from 'components';
 import { Grid, SelectWrapper, Price } from './styles';
 
 export const query = graphql`
@@ -62,22 +62,33 @@ const ProductTemplate = ({ data }) => {
         <div>
           <h1>{data.shopifyProduct.title}</h1>
           <p>{data.shopifyProduct.description}</p>
-          {product?.availableForSale && !!selectedVariant && (
+          {product?.availableForSale && (
             <>
-              <SelectWrapper>
-                <strong>Variant</strong>
-                <select
-                  value={selectedVariant.id}
-                  onChange={handleVariantChange}
-                >
-                  {product?.variants.map(variant => (
-                    <option key={variant.id} value={variant.id}>
-                      {variant.title}
-                    </option>
-                  ))}
-                </select>
-              </SelectWrapper>
-              <Price>{selectedVariant?.price}$</Price>
+              {product.variants.length > 1 && (
+                <SelectWrapper>
+                  <strong>Variant</strong>
+                  <select
+                    value={selectedVariant?.id}
+                    onChange={handleVariantChange}
+                  >
+                    {product?.variants.map(variant => (
+                      <option key={variant.id} value={variant.id}>
+                        {variant.title}
+                      </option>
+                    ))}
+                  </select>
+                </SelectWrapper>
+              )}
+
+              {selectedVariant && (
+                <>
+                  <Price>{selectedVariant?.price}$</Price>
+                  <ProductQuantityAdder
+                    variantId={selectedVariant.id}
+                    available={selectedVariant.available}
+                  />
+                </>
+              )}
             </>
           )}
         </div>

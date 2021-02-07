@@ -23,3 +23,9 @@ export const SelectWrapper = styled.div`
     margin-bottom: 8px;
   }
 `;
+
+export const Price = styled.div`
+  margin: 40px 0;
+  font-weight: bold;
+  font-size: 30px;
+`;

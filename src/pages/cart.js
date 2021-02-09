@@ -1,8 +1,12 @@
 import React from 'react';
-import { Layout } from 'components';
+import { Layout, CartContents } from 'components';
 
 const CartPage = () => {
-  return <Layout>Cart Page</Layout>;
+  return (
+    <Layout>
+      <CartContents />
+    </Layout>
+  );
 };
 
 export default CartPage;

@@ -10,3 +10,5 @@ export * from './StyledLink';
 export * from './CartContents';
 export * from './QuantityAdjuster';
 export * from './RemoveLineItem';
+export * from './HomepageCollections';
+export * from './CollectionTile';
